@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .navbar {
+            background-color: #ff6200;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            height: 80px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .search-bar {
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-bar input[type="text"] {
+            padding: 8px;
+            width: 320px;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .search-bar button {
+            background-color: #ffd700;
+            color: #333;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 15px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .search-bar button:hover {
+            background-color: #ffcc00;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            margin-top: 20px;
+            justify-content: space-evenly;
+            gap: 20px;
+        }
+
+        .nav-links li a {
+            text-decoration: none;
+            color: white;
+            transition: 0.3s;
+        }
+
+        .nav-links li a:hover {
+            color: #ffd700;
+        }
+
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .tab-button {
+            background-color: #ff6200;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin: 0 10px;
+        }
+
+        .tab-button:hover {
+            background-color: #ffcc00;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        .tab-content h2 {
+            color: #333;
+        }
+
+        .tab-content p {
+            color: #555;
+        }
+
+        .category1 {
+            height: 74px;
+            width: 74px;
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em,
+                rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .category1:hover {
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        }
+
+        .category1 p {
+            margin: 0;
+        }
+
+        .categories {
+            width: 80%;
+            margin: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+        }
+
+        .card {
+            max-width: 40%;
+            margin: 20px auto;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            background-color: #ff6200;
+            color: #fff;
+            border-radius: 10px 10px 0 0;
+            padding: 20px;
+            text-align: center;
+            font-size: 24px;
+        }
+
+        .image-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+        }
+
+        .image {
+            flex: 0 0 calc(33.33% - 10px);
+            max-width: calc(33.33% - 10px);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .image:hover {
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        }
+
+        .image img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .image p.card-image-label {
+            margin: 10px 0;
+            font-weight: bold;
+            display: block;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(255, 255, 255, 0.7);
+        }
+
+        .entire-card {
+            display: flex;
+            justify-content: center;
+            width: 90%;
+            margin: auto;
+        }
+
+        .entire-card1 {
+            display: flex;
+            justify-content: center;
+            width: 90%;
+            margin: auto;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-logo img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+
+        .footer-logo p {
+            margin: 0;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .footer-contact {
+            padding: 10px;
+            border-left: 1px solid #555;
+            margin-left: 20px;
+        }
+
+        .footer-contact h3 {
+            margin: 0 0 10px;
+            font-size: 16px;
+        }
+
+        .footer-contact p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .footer-social a {
+            color: #fff;
+            font-size: 24px;
+            margin-right: 20px;
+            text-decoration: none;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .tabs a {
+            text-decoration: none;
+            color: black;
+        }
+
+        .dropdown:hover .dropdown-menu .dropdown-item:hover {
+            background-color: white;
+            color: black;
+        }
+
+          .dropdown1 {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .dropdown-content {
+            visibility: hidden;
+            position: absolute;
+            min-width: 110px;
+            background-color:black;
+            /* color:white; */
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            padding: 10px 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .dropdown1:hover .dropdown-content {
+            visibility: visible;
+            margin-top: 2px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar fixed-top">
+        <div class="logo"><a href="/home" style="text-decoration:none;color:white ; font-size:medium">SERVICE-PRISM</a></div>
+        <form action="search" method="post">
+            <div class="search-bar">
+                <input type="text" placeholder="Search..." name="searchdata">
+                <button>Search</button>
+            </div>
+        </form>
+        <ul class="nav-links">
+            <li><a href="/home" style="color: #ffd700;">Home</a></li>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false" style="background-color: transparent; border: none; margin-top: -5px; ">
+                    Categories
+                </button>
+                <ul class="dropdown-menu" style="background-color: black; color: white;">
+                    <li><a class="dropdown-item" href="/resturant">Restaurant</a></li>
+                    <li><a class="dropdown-item" href="/hospital">Hospital</a></li>
+                  <li><a class="dropdown-item" href="/gym">Gym</a></li>
+                  <li><a class="dropdown-item" href="/beauty">Beauty</a></li>
+                  <li><a class="dropdown-item" href="/pet">Pet Shop</a></li>
+                    <li><a class="dropdown-item" href="/estate">Estate</a></li>
+                    <li><a class="dropdown-item" href="/acservice">Ac Service</a></li>
+                  <li><a class="dropdown-item" href="/carservice">Car Service</a></li>
+                  <li><a class="dropdown-item" href="/plumber">Plumber</a></li>
+                  <li><a class="dropdown-item" href="/education">Education</a></li>
+                  <li><a class="dropdown-item" href="/driving">Driving</a></li>
+                  <li><a class="dropdown-item" href="/dentist">Dentist</a></li>
+                </ul>
+            </div>
+           <li> <div class="dropdown1">
+                    <a href="/">
+                        <i class="fa-regular fa-circle-user fa-xl" style="color: white;"></i>
+                        <span style="color:white;" id="user">Login</span>
+                    </a>
+                    <div class="dropdown-content">
+                        <span><a href="">My Account</a></span>
+                        <span><a href="/" onclick="logout()"><i class="fa-solid fa-power-off fa-lg"
+                                    style="color: white;"></i> <span id="logout">Logout</span></a></span>
+                    </div>
+                </div></li>
+            <!-- <li><a href="#">Classifieds</a></li> -->
+          <li><a href="/connectWithUs">Connect</a></li>
+        </ul>
+    </nav>
+
+    <!-- // side background-color -->
+
+    <div id="carouselExampleAutoplaying" class="carousel slide carousel-fade" data-bs-ride="carousel" style="margin-top:80px;">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="https://cdn.glitch.global/5f7fb6e4-1cef-4e34-8096-64b006409e28/Order%20Now.png?v=1697446732294"
+                    class="d-block w-100" alt="..." style="height: 540px;  width:auto;background-size:cover; object-fit:center">
+            </div>
+            <div class="carousel-item">
+                <img src="https://cdn.glitch.global/fd8a5c88-9484-49a1-a0b6-cd82ece5a283/www..com.png?v=1697450297998"
+                    class="d-block w-100" alt="..." style="height: 540px; object-fit:center;">
+            </div>
+            <div class="carousel-item">
+                <img src="https://cdn.glitch.global/4d4d79b1-b814-42af-b530-6233d8287731/Untitled%20design.png?v=1697450569662"
+                    class="d-block w-100" alt="..." style="height: 540px;">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
+            data-bs-slide="prev" >
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+    <div class="tabs">
+        <a href="/resturant">
+            <div class="categories">
+                <div class="category1" onclick="showTab('Restaurant')">
+                    <img src="https://akam.cdn.jdmagicbox.com/images/icons/newwap/newhotkey/restaurant-2022.svg?w=96&amp;q=75"
+                        alt="">
+                    <p>Resturant</p>
+                </div>
+        </a>
+        <a href="/hospital">
+            <div class="category1" onclick="showTab('Hospital')">
+                <img src="https://akam.cdn.jdmagicbox.com/images/icons/newwap/newhotkey/hospital_2023.svg?w=96&amp;q=75"
+                    alt="">
+                <p>Hospital</p>
+            </div>
+        </a>
+
+        <a href="/gym">
+            <div class="category1" onclick="showTab('Gym')">
+                <img src="https://tse3.mm.bing.net/th?id=OIP.kq4kvVhMw3BwGyxvOyyMzAHaHu&pid=Api&P=0&h=180" alt=""
+                    style="height: 50px; width: 50px;">
+                <p>Gym</p>
+            </div>
+        </a>
+
+        <a href="/beauty">
+            <div class="category1" onclick="showTab('Beauty')">
+                <img src="https://akam.cdn.jdmagicbox.com/images/icons/newwap/newhotkey/beauty.svg?w=48&q=75" alt="">
+                <p>Beauty</p>
+            </div>
+        </a>
+
+        <a href="/pet">
+            <div class="category1" onclick="showTab('PetShops')">
+                <img src="https://akam.cdn.jdmagicbox.com/images/icons/newwap/newhotkey/pet_shops_2023.svg?w=96&q=75"
+                    alt="">
+                <p style="font-size: 14px;">Pet Shops</p>
+            </div>
+        </a>
+
+        <a href="/estate">
+            <div class="category1" onclick="showTab('EstateAgent')">
+                <img src="https://akam.cdn.jdmagicbox.com/images/icons/newwap/newhotkey/estate-agent.svg?w=48&q=75"
+                    alt="">
+                <p>Estate Agent</p>
+            </div>
+        </a>
+
+        <!-- Add more categories as needed -->
+    </div>
+    <!-- Add more buttons for additional categories if needed -->
+    </div>
+    <div class="tabs">
+        <div class="categories">
+            <a href="/acservice">
+                <div class="category1" onclick="showTab('Ac_service')">
+                    <img src="https://blog.allfixhome.com/images/1657359071.png"
+                        alt="" height="60px" width="60px">
+                    <p>AC</p>
+                </div>
+            </a>
+            <a href="/carservice">
+                <div class="category1" onclick="showTab('Car_service')">
+                    <img src="https://tse1.mm.bing.net/th?id=OIP.Noi49umziyocazAqtViH3QHaIa&pid=Api&P=0&h=180"
+                        alt="" height="50px" width="50px">
+                    <p style="font-size: 14px;">Car</p>
+                </div>
+            </a>
+
+            <a href="/plumber">
+                <div class="category1" onclick="showTab('Flumber_service')">
+                    <img src="https://tse4.mm.bing.net/th?id=OIP.Pk-UMB0-T6FbCskJEHKraQHaHF&pid=Api&P=0&h=180"
+                        alt="" style="height: 50px; width: 50px;">
+                    <p>Plumber</p>
+                </div>
+            </a>
+
+            <a href="/education">
+                <div class="category1" onclick="showTab('CourierService')">
+                    <img src="https://akam.cdn.jdmagicbox.com/images/icons/newwap/newhotkey/education.svg?w=48&q=75"
+                        alt="">
+                    <p>Education</p>
+                </div>
+            </a>
+
+            <a href="/driving">
+                <div class="category1" onclick="showTab('RentHire2')">
+                    <img src="https://akam.cdn.jdmagicbox.com/images/icons/newwap/newhotkey/driving_school_2023.svg?w=48&q=75"
+                        alt="">
+                    <p>Driving</p>
+                </div>
+            </a>
+            <a href="/dentist">
+                <div class="category1" onclick="showTab('Dentists')">
+                    <img src="https://akam.cdn.jdmagicbox.com/images/icons/newwap/newhotkey/dentist_2023.svg?w=96&q=75"
+                        alt="">
+                    <p>Dentists</p>
+                </div>
+            </a>
+            <!-- Add more categories as needed -->
+        </div>
+        <!-- Add more buttons for additional categories if needed -->
+    </div>
+
+    <div id="Restaurant" class="tab-content">
+        <h2>Restaurant</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et ligula quis justo cursus consequat.</p>
+        <p>Contact: Phone - 123-456-7890</p>
+    </div>
+
+    <div id="Hospital" class="tab-content">
+        <h2>Hospital</h2>
+        <p>Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.</p>
+        <p>Contact: Phone - 987-654-3210</p>
+    </div>
+
+    <div class="entire-card">
+
+        <div class="card">
+            <div class="card-header">
+                Beauty & Spa
+            </div>
+            <div class="image-row">
+                <div class="image">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQu1VI1yvcroixqT5OTMpu9JHAczTx0SJWpEg&usqp=CAU"
+                        alt="Image 1">
+                    <p>Parlor</p>
+                </div>
+                <div class="image">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRK0NnVdfOFMVCVkFm4Q8LmX1bgGIRIeVFQ3g&usqp=CAU"
+                        alt="Image 2">
+                    <p>Massage</p>
+                </div>
+                <div class="image">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyeWgYsQfq6Dox2il3ATWwKzvaPtKfBMhr7w&usqp=CAU"
+                        alt="Image 3">
+                    <p>Salon</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                Wedding Requisites
+            </div>
+            <div class="image-row">
+                <div class="image">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNIV-n5BiirCuAIyAig8Z1yffkhAvTPC3jsg&usqp=CAU"
+                        alt="Image 1">
+                    <p>Banquet Halls</p>
+                </div>
+                <div class="image">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhy2Nbdt0KBxYY6nf5pOgC2y3QgIfdwtVgsg&usqp=CAU"
+                        alt="Image 2">
+                    <p>Bridal Requisites</p>
+                </div>
+                <div class="image">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0t9TJhXG5t6cgzyogkMCYbDy0azV8xAE0NQ&usqp=CAU"
+                        alt="Image 3">
+                    <p>Caterers</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="entire-card1">
+        <div class="card">
+            <div class="card-header">
+                Repair & Services
+            </div>
+            <div class="image-row">
+                <div class="image">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgf9nGQpmKw0Szm7l0SzYddKDkbHC2vjgNLg&usqp=CAU"
+                        alt="Image 1">
+                    <p>Bike Services</p>
+                </div>
+                <div class="image">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpeG_5iH3_TCZlqNvWT6WN2FDxgRZUk5Ze5A&usqp=CAU"
+                        alt="Image 2">
+                    <p>Car Services</p>
+                </div>
+                <div class="image">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgvwFAPkAwkIBFVC17DXZzZarU7NdE93stkQ&usqp=CAU"
+                        alt="Image 3">
+                    <p>Phone Service</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                Travel Bookings
+            </div>
+            <div class="image-row">
+                <div class="image">
+                    <img src="https://tse3.mm.bing.net/th?id=OIP.sUQ2QMyhqQCD9ycRZvuuIgHaE8&pid=Api&P=0&h=180"
+                        alt="Image 1">
+                    <p>Bus</p>
+                </div>
+                <div class="image">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8rXFXSgUq3Bh4vb0OWnep002VFT7Cr-JMeA&usqp=CAU"
+                        alt="Image 2">
+                    <p>Train</p>
+                </div>
+                <div class="image">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCubio-BZrcg0_WLMGoE8Qpey-Ighhv8G05g&usqp=CAU"
+                        alt="Image 3">
+                    <p>Hotel</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="your-logo.png" alt="Logo">
+                <p>sanj dail</p>
+            </div>
+            <div class="footer-links">
+                <ul>
+                    <li><a href="/home">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="/contactUs">Contact</a></li>
+                    <!-- Add more footer links as needed -->
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h3>Contact Us</h3>
+                <p>Email: info@yourwebsite.com</p>
+                <p>Phone: +123-456-7890</p>
+                <!-- Add more contact information as needed -->
+            </div>
+            <div class="footer-social">
+                <a href="#"><i class="fa-brands fa-facebook fa-lg"></i></a>
+                <a href="#"><i class="fa-brands fa-twitter fa-lg"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram fa-lg"></i></a>
+                <!-- Add social media icons and links as needed -->
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2023 sanj dail. All rights reserved.
+        </div>
+    </footer>
+
+
+    <script>
+        function showTab(tabName) {
+            var tabs = document.getElementsByClassName("tab-content");
+            for (var i = 0; i < tabs.length; i++) {
+                tabs[i].style.display = "none";
+            }
+
+            document.getElementById(tabName).style.display = "block";
+        }
+        document.addEventListener("DOMContentLoaded", function () {
+            const username = document.cookie
+                .split('; ')
+                .find(row => row.startsWith('username='))
+                .split('=')[1];
+
+            if (username) {
+                document.getElementById("user").innerHTML = username;
+            }
+        });
+
+        function logout() {
+            // Set a logout flag in a cookie
+            document.cookie = 'username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+            document.cookie = 'logoutFlag=true; path=/';
+            // Redirect to the home page
+            window.location.href = "/home"; 
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js
+ "></script>
+</body>
+
+</html>

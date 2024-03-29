@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+</head>
+<style>
+    .dropdown:hover .dropdown-menu .dropdown-item:hover {
+        background-color: white;
+        color: black;
+    }
+
+    .dropdown1 {
+        position: relative;
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    .dropdown-content {
+        visibility: hidden;
+        position: absolute;
+        min-width: 110px;
+        background-color: black;
+        /* color:white; */
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        padding: 10px 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .dropdown1:hover .dropdown-content {
+        visibility: visible;
+        margin-top: 2px;
+    }
+
+    .navbar {
+        background-color: #ff6200;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 20px;
+        /* Increase the top padding */
+        height: 100px;
+        /* Increase the height */
+    }
+
+    .logo {
+        font-size: 24px;
+        font-weight: bold;
+        margin-top: 10px;
+        /* Adjust the value to vertically center it */
+    }
+
+    .search-bar {
+        display: flex;
+        gap: 10px;
+    }
+
+    .search-bar input[type="text"] {
+        padding: 8px;
+        width: 320px;
+        border: none;
+        border-radius: 5px;
+        outline: none;
+    }
+
+    .search-bar button {
+        background-color: #ffd700;
+        color: #333;
+        border: none;
+        border-radius: 5px;
+        padding: 8px 15px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .search-bar button:hover {
+        background-color: #ffcc00;
+    }
+
+    .nav-links {
+        list-style: none;
+        display: flex;
+        margin-top: 20px;
+        justify-content: space-evenly;
+        gap: 20px;
+    }
+
+    .nav-links li a {
+        text-decoration: none;
+        color: white;
+        transition: 0.3s;
+    }
+
+    .nav-links li a:hover {
+        color: #ffd700;
+    }
+
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f2f2f2;
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+    }
+
+    .page-heading {
+        margin-top: 100px;
+        /* Adjust the value as needed */
+        background: linear-gradient(135deg, #ff6200, #ff5f00);
+        color: #fff;
+        text-align: center;
+        padding: 30px 0;
+    }
+
+    .page-heading h1 {
+        font-size: 36px;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin: 0;
+    }
+
+    .page-heading p {
+        font-size: 18px;
+    }
+
+
+
+    .restaurant-card {
+        display: flex;
+        width: 841px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        position: relative;
+    }
+
+    .like-button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        /* background-color: #e74c3c;
+ border: 1px solid black;
+ border: none;
+ border-radius: 5px; */
+
+        padding: 8px;
+        cursor: pointer;
+    }
+
+    /* .like-button.clicked {
+ color: red;
+ } */
+
+
+
+    /* .restaurant-image {
+        width: 50%;
+        height: 300px;
+        object-fit: cover;
+    } */
+
+    .restaurant-image {
+        width: 50%;
+        height: 100%;
+        /* Adjusted height to fill the card vertically */
+        object-fit: cover;
+        /* Ensure the image covers the entire space */
+    }
+
+
+    .restaurant-details {
+        padding: 20px;
+        width: 50%;
+        margin-top: 30px;
+    }
+
+    .restaurant-name {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 8px;
+    }
+
+    .star-rating {
+        color: #ffc107;
+        margin-bottom: 12px;
+    }
+
+    .restaurant-address {
+        font-size: 16px;
+        color: #555;
+        margin-bottom: 12px;
+    }
+
+    .opening-hours {
+        font-size: 16px;
+        color: #555;
+        margin-bottom: 24px;
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+    }
+
+    .button {
+        padding: 12px;
+        width: 30%;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        color: #fff;
+        font-weight: bold;
+    }
+
+    .show-number {
+        background-color: #3498db;
+        width: 150px;
+        height: 38px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .menu {
+        background-color: #27ae60;
+        height: 38px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Override Bootstrap Dropdown Styles */
+    .dropdown-menu {
+        background-color: transparent;
+        /* Set background to transparent */
+    }
+
+    .dropdown-item {
+        color: black;
+        /* Set text color to black */
+    }
+
+    /* Hover effect for dropdown items */
+    .dropdown-item:hover {
+        background-color: #f2f2f2;
+        color: black;
+        /* Set hover background color */
+    }
+
+    .card-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 20px;
+    }
+
+
+    footer {
+        background-color: #333;
+        color: #fff;
+        padding: 20px 0;
+        position: relative;
+        bottom: -30px;
+    }
+
+    .footer-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .footer-logo img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+    }
+
+    .footer-logo p {
+        margin: 0;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .footer-links ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .footer-links li {
+        margin-bottom: 10px;
+    }
+
+    .footer-links a {
+        text-decoration: none;
+        color: #fff;
+        font-weight: bold;
+    }
+
+    .footer-contact {
+        padding: 10px;
+        border-left: 1px solid #555;
+        margin-left: 20px;
+    }
+
+    .footer-contact h3 {
+        margin: 0 0 10px;
+        font-size: 16px;
+    }
+
+    .footer-contact p {
+        margin: 0;
+        font-size: 14px;
+    }
+
+    .footer-social a {
+        color: #fff;
+        font-size: 24px;
+        margin-right: 20px;
+        text-decoration: none;
+    }
+
+    .footer-bottom {
+        text-align: center;
+        margin-top: 10px;
+        font-size: 14px;
+    }
+</style>
+
+<body>
+    <nav class="navbar fixed-top">
+        <div class="logo"><a href="/home" style="text-decoration:none;color:white ">sanjdail</a></div>
+        <form action="search" method="post">
+            <div class="search-bar">
+                <input type="text" placeholder="Search..." name="searchdata">
+                <button>Search</button>
+            </div>
+        </form>
+        <ul class="nav-links">
+            <li><a href="/home">Home</a></li>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                    style="background-color: transparent; border: none; margin-top: -5px; color: #ffd700;">
+                    Categories
+                </button>
+              <ul class="dropdown-menu" style="background-color: black; color: white;">
+                  <li><a class="dropdown-item" href="/resturant">Restaurant</a></li>
+                  <li><a class="dropdown-item" href="/hospital">Hospital</a></li>
+                <li><a class="dropdown-item" href="/gym">Gym</a></li>
+                <li><a class="dropdown-item" href="/beauty">Beauty</a></li>
+                <li><a class="dropdown-item" href="/pet">Pet Shop</a></li>
+                  <li><a class="dropdown-item" href="/estate">Estate</a></li>
+                  <li><a class="dropdown-item" href="/acservice">Ac Service</a></li>
+                <li><a class="dropdown-item" href="/carservice">Car Service</a></li>
+                <li><a class="dropdown-item" href="/plumber">Plumber</a></li>
+                <li><a class="dropdown-item" href="/education">Education</a></li>
+                <li><a class="dropdown-item" href="/driving">Driving</a></li>
+                <li><a class="dropdown-item" href="/dentist">Dentist</a></li>
+              </ul>
+            </div>
+            <li>
+                <div class="dropdown1">
+                    <a href="/">
+                        <i class="fa-regular fa-circle-user fa-xl" style="color: white;"></i>
+                        <span style="color:white;" id="user">Login</span>
+                    </a>
+                    <div class="dropdown-content">
+                        <span><a href="">My Account</a></span>
+                        <span><a href="/" onclick="logout()"><i class="fa-solid fa-power-off fa-lg"
+                                    style="color: white;"></i> <span id="logout">Logout</span></a></span>
+                    </div>
+                </div>
+            </li>
+            <!-- <li><a href="#">Classifieds</a></li> -->
+            <li><a href="/connectWithUs">Connect</a></li>
+        </ul>
+    </nav>
+
+    <div class="page-heading">
+        <h1>Bhimavaram Plumber</h1>
+        <p>Your local resource for all things Plumber.</p>
+    </div>
+
+
+
+
+
+    <div class="card-container">
+      <% plumbers.forEach(plumber => { %>
+          <div class="restaurant-card">
+              <!-- Add your card content here using restaurant properties -->
+            <div class="like-button" onclick="toggleLike(this)"><i class="fa-regular fa-heart fa-xl"></i></div>
+              <img class="restaurant-image" src="<%= plumber.imageUrl %>" alt="Restaurant Image">
+              <div class="restaurant-details">
+                  <div class="restaurant-name"><%= plumber.Name %></div>
+                 <div class="star-rating" style="font-size: 24px;">&#9733; &#9733; &#9733; &#9733; &#9734;</div>
+
+                  <div class="restaurant-address"><%= plumber.Address%> </div>
+                 <div class="opening-hours"><b>Opens at</b> 9:00 AM .  <span> ₹ <%= plumber.price%> Price for two</span></div>
+                  <!-- Other restaurant details here -->
+                  <div class="button-container">
+                    <button class="button show-number" onclick="Changephone1(this)"><i class="fa-solid fa-shake fa-phone fa-lg"
+                      style="color: #fafcff;"></i><span id="text">Show&nbsp;Number</span><span id="number" style="display:none;"><%= plumber.contactNumber %></span></button>
+                      <!-- Add other buttons or actions here -->
+                    <button class="button menu" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                        data-bs-whatever="@mdoj" fdprocessedid="z53q9">Feedback</button>
+                    <!-- modal -->
+                    <form action="">
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true" style="display: none;">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Let us know what ur thinking
+                                        </h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <div class="mb-3">
+                                                <label for="recipient-name" class="col-form-label">Email:</label>
+                                                <input type="text" class="form-control" id="recipient-name">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="message-text" class="col-form-label">Message:</label>
+                                                <textarea class="form-control" id="message-text"></textarea>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                  </div>
+              </div>
+          </div>
+      <% }); %>
+      
+        <div class="restaurant-card">
+            <div class="like-button" onclick="toggleLike(this)"><i class="fa-regular fa-heart fa-xl"></i></div>
+            <img class="restaurant-image"
+                src="https://creativemindhome.com/wp-content/uploads/2021/08/GettyImages-169270299-5bb6887c46e0fb002696522e.jpg"
+                alt="Restaurant Image">
+            <div class="restaurant-details">
+                <div class="restaurant-name">Durga Electrical and Plumbing & Sanitary Works</div>
+                <!-- <div class="star-rating">⭐⭐⭐⭐⭐</div> -->
+                <div class="star-rating" style="font-size: 24px;">&#9733; &#9733; &#9733; &#9733; &#9734;</div>
+                <div class="restaurant-address">Besides Hansi Kalyana Mandapam, DNR Road, Bhimavaram, Andhra Pradesh
+                    534202</div>
+                <div class="opening-hours"><b>Opens at</b> Mon - Sun
+                    9:30 am - 9:30 pm. <span> 2 Years in Business</span></div>
+                <div class="button-container">
+                    <button class="button show-number" onclick="Changephone(this)"><i
+                            class="fa-solid fa-shake fa-phone fa-lg"
+                            style="color: #fafcff;"></i><span>Show&nbsp;Number</span></button>
+                    <button class="button menu" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                        data-bs-whatever="@mdoj" fdprocessedid="z53q9">Feedback</button>
+                    <!-- modal -->
+                    <form action="">
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true" style="display: none;">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Let us know what ur
+                                            thinking
+                                        </h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <div class="mb-3">
+                                                <label for="recipient-name" class="col-form-label">Email:</label>
+                                                <input type="text" class="form-control" id="recipient-name">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="message-text" class="col-form-label">Message:</label>
+                                                <textarea class="form-control" id="message-text"></textarea>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="restaurant-card">
+            <div class="like-button" onclick="toggleLike(this)"><i class="fa-regular fa-heart fa-xl"></i></div>
+            <img class="restaurant-image"
+                src="https://cloudfrontgharpediabucket.gharpedia.com/uploads/2022/03/Services-Offered-by-a-Good-Plumber-01-0601020010.jpg"
+                alt="Restaurant Image">
+            <div class="restaurant-details">
+                <div class="restaurant-name"> ELECTRIC WORKS & AC Repair Service</div>
+                <!-- <div class="star-rating">⭐⭐⭐⭐⭐</div> -->
+                <div class="star-rating" style="font-size: 24px;">&#9733; &#9733; &#9733; &#9733; &#9734;</div>
+                <div class="restaurant-address">Address:GGX7+7VR, Undi Rd, Tammi Raju Nagar, Bhimavaram, Andhra Pradesh
+                    534204</div>
+                <div class="opening-hours"><b>Opens at</b> Mon - Sun
+                    9:30 am - 9:30 pm. <span>17 Years in Business</span></div>
+                <div class="button-container">
+                    <button class="button show-number" onclick="Changephone(this)"><i
+                            class="fa-solid  fa-shake fa-phone fa-lg"
+                            style="color: #fafcff;"></i><span>Show&nbsp;Number</span></button>
+                    <button class="button menu" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                        data-bs-whatever="@mdoj" fdprocessedid="z53q9">Feedback</button>
+                    <!-- modal -->
+                    <form action="">
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true" style="display: none;">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Let us know what ur
+                                            thinking
+                                        </h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <div class="mb-3">
+                                                <label for="recipient-name" class="col-form-label">Email:</label>
+                                                <input type="text" class="form-control" id="recipient-name">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="message-text" class="col-form-label">Message:</label>
+                                                <textarea class="form-control" id="message-text"></textarea>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="restaurant-card">
+            <div class="like-button" onclick="toggleLike(this)"><i class="fa-regular fa-heart fa-xl"></i></div>
+            <img class="restaurant-image"
+                src="https://hunter-water.imgix.net/assets/src/uploads/images/Building-and-development/plumbers002_191217_204827.jpg?auto=compress%2Cformat&fit=clip&mode=crop&q=80"
+                alt="Restaurant Image">
+            <div class="restaurant-details">
+                <div class="restaurant-name">City Clap</div>
+                <!-- <div class="star-rating">⭐⭐⭐⭐⭐</div> -->
+                <div class="star-rating" style="font-size: 24px;">&#9733; &#9733; &#9733; &#9733; &#9734;</div>
+                <div class="restaurant-address">Adress: GGWR+W55, Housing Board Colony, Bhimavaram, Andhra Pradesh
+                    534210</div>
+                <div class="opening-hours"><b>Opens at</b> Mon - Sun
+                    9:30 am - 9:30 pm. <span> 2 Years in Business</span></div>
+                <div class="button-container">
+                    <button class="button show-number" onclick="Changephone(this)"><i
+                            class="fa-solid  fa-shake fa-phone fa-lg"
+                            style="color: #fafcff;"></i><span>Show&nbsp;Number</span></button>
+                    <button class="button menu" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                        data-bs-whatever="@mdoj" fdprocessedid="z53q9">Feedback</button>
+                    <!-- modal -->
+                    <form action="">
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true" style="display: none;">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Let us know what ur
+                                            thinking
+                                        </h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <div class="mb-3">
+                                                <label for="recipient-name" class="col-form-label">Email:</label>
+                                                <input type="text" class="form-control" id="recipient-name">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="message-text" class="col-form-label">Message:</label>
+                                                <textarea class="form-control" id="message-text"></textarea>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="restaurant-card">
+            <div class="like-button" onclick="toggleLike(this)"><i class="fa-regular fa-heart fa-xl"></i></div>
+            <img class="restaurant-image"
+                src="https://southwestpipetrades.com/wp-content/uploads/elementor/thumbs/professional-plumber-p54p676i1nwuoai8rvsz0wzuji1vgxqq9ml8hyz8mo.jpg"
+                alt="Restaurant Image">
+            <div class="restaurant-details">
+                <div class="restaurant-name">
+                    Sri Laxmi Durga Electrical Works</div>
+                <!-- <div class="star-rating">⭐⭐⭐⭐⭐</div> -->
+                <div class="star-rating" style="font-size: 24px;">&#9733; &#9733; &#9733; &#9733; &#9734;</div>
+                <div class="restaurant-address">Address: Near Fci Godowns, Bhimavaram - 534201 (Opposite Busdepot)</div>
+                <div class="opening-hours"><b>Opens until</b> Mon - Sun
+                    9:30 am - 9:30 pm. <span> 5 Years in Business</span>
+                </div>
+                <div class="button-container">
+                    <button class="button show-number" onclick="Changephone(this)"><i
+                            class="fa-solid fa-shake fa-phone fa-lg"
+                            style="color: #fafcff;"></i><span>Show&nbsp;Number</span></button>
+                    <button class="button menu" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                        data-bs-whatever="@mdoj" fdprocessedid="z53q9">Feedback</button>
+                    <!-- modal -->
+                    <form action="">
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true" style="display: none;">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Let us know what ur
+                                            thinking
+                                        </h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <div class="mb-3">
+                                                <label for="recipient-name" class="col-form-label">Email:</label>
+                                                <input type="text" class="form-control" id="recipient-name">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="message-text" class="col-form-label">Message:</label>
+                                                <textarea class="form-control" id="message-text"></textarea>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="restaurant-card">
+            <div class="like-button" onclick="toggleLike(this)"><i class="fa-regular fa-heart fa-xl"></i></div>
+            <img class="restaurant-image"
+                src="https://trusteyman.com/wp-content/uploads/2021/09/emergency-plumbers.jpeg"
+                alt="Restaurant Image">
+            <div class="restaurant-details">
+                <div class="restaurant-name">Ravi Plumbing</div>
+                <!-- <div class="star-rating">⭐⭐⭐⭐⭐</div> -->
+                <div class="star-rating" style="font-size: 24px;">&#9733; &#9733; &#9733; &#9733; &#9734;</div>
+                <div class="restaurant-address">Address:Suresh Plumbing Door No, Bhimavaram HO, Bhimavaram - 534201 (Bnr Collage)</div>
+                <div class="opening-hours"><b>Opens until</b> Mon - Sun
+                    9:30 am - 9:30 pm. <span> 9 Years in Business</span>
+                </div>
+                <div class="button-container">
+                    <button class="button show-number" onclick="Changephone(this)"><i
+                            class="fa-solid  fa-shake fa-phone fa-lg"
+                            style="color: #fafcff;"></i><span>Show&nbsp;Number</span></button>
+                    <button class="button menu" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                        data-bs-whatever="@mdoj" fdprocessedid="z53q9">Feedback</button>
+                    <!-- modal -->
+                    <form action="">
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true" style="display: none;">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Let us know what ur
+                                            thinking
+                                        </h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <div class="mb-3">
+                                                <label for="recipient-name" class="col-form-label">Email:</label>
+                                                <input type="text" class="form-control" id="recipient-name">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="message-text" class="col-form-label">Message:</label>
+                                                <textarea class="form-control" id="message-text"></textarea>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="restaurant-card">
+            <div class="like-button" onclick="toggleLike(this)"><i class="fa-regular fa-heart fa-xl"></i></div>
+            <img class="restaurant-image"
+                src="https://content.jdmagicbox.com/comp/jhansi/n6/9999px510.x510.210822090029.h4n6/catalogue/bharat-plumber-jhansi-ho-jhansi-plumbers-hk6t31hrb5.jpg"
+                alt="Restaurant Image">
+            <div class="restaurant-details">
+                <div class="restaurant-name">Bharat Plumbers</div>
+                <!-- <div class="star-rating">⭐⭐⭐⭐⭐</div> -->
+                <div class="star-rating" style="font-size: 24px;">&#9733; &#9733; &#9733; &#9733; &#9734;</div>
+                <div class="restaurant-address">Address:Kodavalli Road, Bhimavaram Ho, Bhimavaram - 534201 (Near Anjaneya Swamy Temple, Narasayyaagraharam)</div>
+                <div class="opening-hours"><b>Opens at</b> Mon - Sun
+                    9:30 am - 9:30 pm. <span> 28 Years in Business</span></div>
+                <div class="button-container">
+                    <button class="button show-number" onclick="Changephone(this)"><i
+                            class="fa-solid fa-shake  fa-phone fa-lg"
+                            style="color: #fafcff;"></i><span>Show&nbsp;Number</span></button>
+                    <button class="button menu" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                        data-bs-whatever="@mdoj" fdprocessedid="z53q9">Feedback</button>
+                    <!-- modal -->
+                    <form action="">
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true" style="display: none;">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Let us know what ur
+                                            thinking
+                                        </h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <div class="mb-3">
+                                                <label for="recipient-name" class="col-form-label">Email:</label>
+                                                <input type="text" class="form-control" id="recipient-name">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="message-text" class="col-form-label">Message:</label>
+                                                <textarea class="form-control" id="message-text"></textarea>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ... your existing HTML code ... -->
+
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="your-logo.png" alt="Logo">
+                <p>sanj dail</p>
+            </div>
+            <div class="footer-links">
+                <ul>
+                    <li><a href="/home">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="/contactUs">Contact</a></li>
+                    <!-- Add more footer links as needed -->
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h3>Contact Us</h3>
+                <p>Email: info@yourwebsite.com</p>
+                <p>Phone: +123-456-7890</p>
+                <!-- Add more contact information as needed -->
+            </div>
+            <div class="footer-social">
+                <a href="#"><i class="fa-brands fa-facebook fa-lg"></i></a>
+                <a href="#"><i class="fa-brands fa-twitter fa-lg"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram fa-lg"></i></a>
+                <!-- Add social media icons and links as needed -->
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2023 sanj dail. All rights reserved.
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js
+"></script>
+    <script>
+        function toggleLike(likeButton) {
+            const heartIcon = likeButton.querySelector('i');
+
+            if (likeButton.classList.contains('clicked')) {
+                heartIcon.classList.remove('fas');
+                heartIcon.classList.add('far');
+                heartIcon.style.color = '';
+            } else {
+                heartIcon.classList.remove('far');
+                heartIcon.classList.add('fas');
+                heartIcon.style.color = 'red';
+            }
+
+            likeButton.classList.toggle('clicked');
+        }
+
+        function Changephone(button) {
+            const change = button.querySelector('span');
+            change.textContent = '09965341267';
+        }
+        document.addEventListener("DOMContentLoaded", function () {
+            const username = document.cookie
+                .split('; ')
+                .find(row => row.startsWith('username='))
+                .split('=')[1];
+
+            if (username) {
+                document.getElementById("user").innerHTML = username;
+            }
+        });
+
+        function logout() {
+            // Set a logout flag in a cookie
+            document.cookie = 'username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+            document.cookie = 'logoutFlag=true; path=/';
+            // Redirect to the home page
+            window.location.href = "/home";
+        }
+    </script>
+</body>
+
+</html>
